@@ -5,13 +5,16 @@ namespace CodeTestingService.Models.Requests;
 public class SaveGitLabResultRequest
 {
     [Required]
-    public string RepoUrl { get; set; } = string.Empty;
+    public string ProjectUrl { get; set; } = string.Empty;
+
+    public string? ProjectId { get; set; }
+
+    public string? PipelineId { get; set; }
+
+    public string? MergeRequestIid { get; set; }
+
+    public string? CommitSha { get; set; }
 
     [Required]
-    public string Status { get; set; } = string.Empty;
-
-    [Required]
-    public string Result { get; set; } = string.Empty;
-
-    public DateTime CheckedAt { get; set; }
+    public string Report { get; set; } = string.Empty;
 }

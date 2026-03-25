@@ -1,82 +1,151 @@
 @model CodeTestingService.Models.ViewModels.TeacherPageViewModel
 
-<section class="page-header">
-    <div>
-        <p class="eyebrow">Роль: @Model.CurrentUserRole</p>
-        <h1>@Model.CurrentUserName</h1>
-        <p>Лабораторная работа №@Model.LabNumber</p>
+<section class="workspace-screen">
+    <div class="screen-header">
+        <div class="screen-title-group">
+            <h1 class="screen-title">@Model.CurrentUserName</h1>
+        </div>
     </div>
-    <div class="button-row">
-        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="@Model.CurrentUserRole" asp-route-token="@Model.Token" asp-route-labNumber="1">ЛР 1</a>
-        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="@Model.CurrentUserRole" asp-route-token="@Model.Token" asp-route-labNumber="2">ЛР 2</a>
-    </div>
-</section>
 
-<section class="panel-grid">
-    <article class="panel">
-        <h2>Тестовый репозиторий</h2>
-        @if (string.IsNullOrWhiteSpace(Model.TestRepositoryUrl))
-        {
-            <p class="empty-state">Ссылка на тестовый репозиторий не найдена.</p>
-        }
-        else
-        {
-            <p><a href="@Model.TestRepositoryUrl" target="_blank" rel="noreferrer">@Model.TestRepositoryUrl</a></p>
-        }
-    </article>
-
-    <article class="panel panel-wide">
-        <h2>Студенты и результаты</h2>
-        @if (Model.Students.Count == 0)
-        {
-            <p class="empty-state">Для этого пользователя не найден список студентов.</p>
-        }
-        else
-        {
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Студент</th>
-                        <th>Репозиторий</th>
-                        <th>Статус</th>
-                        <th>Последняя проверка</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var student in Model.Students)
+    <div class="screen-columns">
+        <main class="screen-main">
+            <div class="toolbar-row toolbar-row-single">
+                <div class="toolbar-block full-width">
+                    <div class="toolbar-caption">Ссылка на репозиторий с тестами</div>
+                    @if (string.IsNullOrWhiteSpace(Model.TestRepositoryUrl))
                     {
-                        <tr>
-                            <td>
-                                <strong>@student.StudentName</strong><br />
-                                <span class="muted">ID: @student.StudentId</span>
-                            </td>
-                            <td>
-                                @if (string.IsNullOrWhiteSpace(student.RepoUrl))
-                                {
-                                    <span class="empty-state">Не задан</span>
-                                }
-                                else
-                                {
-                                    <a href="@student.RepoUrl" target="_blank" rel="noreferrer">Открыть</a>
-                                }
-                            </td>
-                            <td>@(student.Status ?? "Нет данных")</td>
-                            <td>@(student.CheckedAt?.ToLocalTime().ToString("dd.MM.yyyy HH:mm") ?? "Нет данных")</td>
-                            <td>
-                                <a class="btn btn-sm btn-primary"
-                                   asp-controller="Results"
-                                   asp-action="StudentDetails"
-                                   asp-route-studentId="@student.StudentId"
-                                   asp-route-labNumber="@Model.LabNumber"
-                                   asp-route-token="@Model.Token">
-                                    История
-                                </a>
-                            </td>
-                        </tr>
+                        <span class="empty-state">Репозиторий с функциональными тестами не найден</span>
                     }
-                </tbody>
-            </table>
-        }
-    </article>
+                    else
+                    {
+                        <a href="@Model.TestRepositoryUrl" target="_blank" rel="noreferrer">@Model.TestRepositoryUrl</a>
+                    }
+                </div>
+            </div>
+
+            <div class="toolbar-row">
+                <div class="toolbar-block repo-block">
+                    <div class="toolbar-caption">Ссылка на репозиторий</div>
+                    @if (string.IsNullOrWhiteSpace(Model.SelectedStudentRepoUrl))
+                    {
+                        <span class="empty-state">Репозиторий выбранного студента не найден</span>
+                    }
+                    else
+                    {
+                        <a href="@Model.SelectedStudentRepoUrl" target="_blank" rel="noreferrer">@Model.SelectedStudentRepoUrl</a>
+                    }
+                </div>
+
+                <div class="toolbar-block select-block">
+                    <div class="toolbar-caption">Выбор результата</div>
+                    <form method="get" class="selector-form">
+                        <input type="hidden" name="token" value="@Model.Token" />
+                        <input type="hidden" name="labNumber" value="@Model.LabNumber" />
+                        @if (Model.SelectedStudentId.HasValue)
+                        {
+                            <input type="hidden" name="studentId" value="@Model.SelectedStudentId" />
+                        }
+                        <select name="selectedResultId" class="form-select form-select-sm" data-autosubmit="true">
+                            @if (Model.Results.Count == 0)
+                            {
+                                <option value="">Нет результатов</option>
+                            }
+                            else
+                            {
+                                @foreach (var item in Model.Results)
+                                {
+                                    if (item.Id == Model.SelectedResultId)
+                                    {
+                                        <option value="@item.Id" selected>
+                                            @item.Status | @item.CheckedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                                        </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">
+                                            @item.Status | @item.CheckedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                                        </option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+            <section class="result-panel">
+                <div class="result-panel-header">
+                    <div>
+                        <div class="toolbar-caption">Результаты</div>
+                        @if (!string.IsNullOrWhiteSpace(Model.SelectedStudentName))
+                        {
+                            <div class="result-meta">
+                                <span>@Model.SelectedStudentName</span>
+                                @if (!string.IsNullOrWhiteSpace(Model.SelectedResultStatus))
+                                {
+                                    <span class="status-badge">@Model.SelectedResultStatus</span>
+                                }
+                                @if (Model.SelectedResultCheckedAt.HasValue)
+                                {
+                                    <span>@Model.SelectedResultCheckedAt.Value.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</span>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="markdown-viewer">
+                    @Html.Raw(MarkdownRenderer.ToHtml(Model.SelectedResultContent))
+                </div>
+            </section>
+        </main>
+
+        <aside class="screen-sidebar">
+            <div class="sidebar-title">Выбор лабораторной работы</div>
+            <form method="get" class="selector-form sidebar-form">
+                <input type="hidden" name="token" value="@Model.Token" />
+                @if (Model.SelectedStudentId.HasValue)
+                {
+                    <input type="hidden" name="studentId" value="@Model.SelectedStudentId" />
+                }
+                <select name="labNumber" class="form-select form-select-sm" data-autosubmit="true">
+                    @foreach (var lab in Model.Labs)
+                    {
+                        if (lab.IsActive)
+                        {
+                            <option value="@lab.LabNumber" selected>Лабораторная работа №@lab.LabNumber</option>
+                        }
+                        else
+                        {
+                            <option value="@lab.LabNumber">Лабораторная работа №@lab.LabNumber</option>
+                        }
+                    }
+                </select>
+            </form>
+
+            <div class="sidebar-title sidebar-title-spaced">Выбор студентов</div>
+            <div class="sidebar-list">
+                @foreach (var student in Model.Students)
+                {
+                    <a class="sidebar-item @(student.IsActive ? "active" : null)"
+                       asp-controller="Home"
+                       asp-action="@Model.ActionName"
+                       asp-route-token="@Model.Token"
+                       asp-route-labNumber="@Model.LabNumber"
+                       asp-route-studentId="@student.StudentId">
+                        <div class="sidebar-item-title">@student.StudentName</div>
+                        @if (!string.IsNullOrWhiteSpace(student.Status))
+                        {
+                            <div class="sidebar-item-meta">@student.Status</div>
+                            <div class="sidebar-item-meta">@student.CheckedAt?.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
+                        }
+                        else
+                        {
+                            <div class="sidebar-item-meta muted">Нет результатов</div>
+                        }
+                    </a>
+                }
+            </div>
+        </aside>
+    </div>
 </section>

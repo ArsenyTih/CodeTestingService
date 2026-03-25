@@ -2,6 +2,8 @@ namespace CodeTestingService.Models.Responses;
 
 public class CheckResultResponse
 {
+    public int Id { get; set; }
+
     public int StudentId { get; set; }
 
     public int LabNumber { get; set; }

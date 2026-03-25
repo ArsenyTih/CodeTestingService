@@ -1,10 +1,10 @@
 [
   {
-    "labNumber": 1,
-    "repoUrl": "https://gitlab.example/labs-tests/lab1"
+    "labNumber": 9,
+    "repoUrl": "https://gitlab.com/hse-programming-2026/infrastructure/labs-students-tests"
   },
   {
-    "labNumber": 2,
-    "repoUrl": "https://gitlab.example/labs-tests/lab2"
+    "labNumber": 10,
+    "repoUrl": "https://gitlab.com/hse-programming-2026/infrastructure/labs-students-tests"
   }
 ]

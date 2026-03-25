@@ -175,9 +175,7 @@ C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTes
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\scopedcss\bundle\CodeTestingService.styles.css
-C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\compressed\8keh5gtqgk-{0}-7mzuzkziiq-7mzuzkziiq.gz
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\compressed\sihiz3xlf5-{0}-61n19gt1b8-61n19gt1b8.gz
-C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\compressed\b1s1768bs7-{0}-z14ykvj0cv-z14ykvj0cv.gz
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\compressed\o8ta7t1f85-{0}-bqjiyaj88i-bqjiyaj88i.gz
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\compressed\knqlh5698r-{0}-c2jlpeoesf-c2jlpeoesf.gz
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\compressed\6bqkifczqe-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -248,3 +246,7 @@ C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTes
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\CodeTestingService.pdb
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\CodeTestingService.genruntimeconfig.cache
 C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\ref\CodeTestingService.dll
+C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\bin\Debug\net10.0\Markdig.dll
+C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\CodeTestingService.sourcelink.json
+C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\compressed\8keh5gtqgk-{0}-p6dk6mfwir-p6dk6mfwir.gz
+C:\Users\arsen\Рабочий стол\Курсач 3\CodeTestingService\CodeTestingService\obj\Debug\net10.0\compressed\b1s1768bs7-{0}-uqmlgbd3bj-uqmlgbd3bj.gz

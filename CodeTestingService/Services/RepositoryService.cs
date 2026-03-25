@@ -1,5 +1,6 @@
 using CodeTestingService.Data;
 using CodeTestingService.Data.Entities;
+using CodeTestingService.Infrastructure;
 using CodeTestingService.Models.Responses;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,7 @@ public class RepositoryService
 
     public async Task<RepositoryResponse> UpsertRepositoryAsync(int studentId, int labNumber, string repoUrl)
     {
-        var normalizedRepoUrl = repoUrl.Trim();
+        var normalizedRepoUrl = RepositoryUrlNormalizer.Normalize(repoUrl);
         var repository = await _dbContext.Repositories
             .FirstOrDefaultAsync(item => item.StudentId == studentId && item.LabNumber == labNumber);
 

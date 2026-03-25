@@ -4,54 +4,104 @@
     ViewData["Title"] = "Студент";
 }
 
-<section class="page-header">
-    <div>
-        <p class="eyebrow">Роль: Student</p>
-        <h1>@Model.CurrentUserName</h1>
-        <p>Лабораторная работа №@Model.LabNumber</p>
+<section class="workspace-screen">
+    <div class="screen-header">
+        <div class="screen-title-group">
+            <h1 class="screen-title">@Model.CurrentUserName</h1>
+        </div>
     </div>
-    <div class="button-row">
-        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Student" asp-route-token="@Model.Token" asp-route-labNumber="1">ЛР 1</a>
-        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Student" asp-route-token="@Model.Token" asp-route-labNumber="2">ЛР 2</a>
-        <a class="btn btn-primary" asp-controller="Results" asp-action="StudentHistory" asp-route-token="@Model.Token" asp-route-labNumber="@Model.LabNumber">История проверок</a>
+
+    <div class="screen-columns">
+        <main class="screen-main">
+            <div class="toolbar-row">
+                <div class="toolbar-block repo-block">
+                    <div class="toolbar-caption">Ссылка на репозиторий</div>
+                    @if (string.IsNullOrWhiteSpace(Model.RepoUrl))
+                    {
+                        <span class="empty-state">Репозиторий не привязан</span>
+                    }
+                    else
+                    {
+                        <a href="@Model.RepoUrl" target="_blank" rel="noreferrer">@Model.RepoUrl</a>
+                    }
+                </div>
+
+                <div class="toolbar-block select-block">
+                    <div class="toolbar-caption">Выбор результата</div>
+                    <form method="get" class="selector-form">
+                        <input type="hidden" name="token" value="@Model.Token" />
+                        <input type="hidden" name="labNumber" value="@Model.LabNumber" />
+                        <select name="selectedResultId" class="form-select form-select-sm" data-autosubmit="true">
+                            @if (Model.Results.Count == 0)
+                            {
+                                <option value="">Нет результатов</option>
+                            }
+                            else
+                            {
+                                @foreach (var item in Model.Results)
+                                {
+                                    if (item.Id == Model.SelectedResultId)
+                                    {
+                                        <option value="@item.Id" selected>
+                                            @item.Status | @item.CheckedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                                        </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">
+                                            @item.Status | @item.CheckedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")
+                                        </option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+            <section class="result-panel">
+                <div class="result-panel-header">
+                    <div>
+                        <div class="toolbar-caption">Результаты</div>
+                        @if (!string.IsNullOrWhiteSpace(Model.SelectedResultStatus))
+                        {
+                            <div class="result-meta">
+                                <span class="status-badge">@Model.SelectedResultStatus</span>
+                                <span>@Model.SelectedResultCheckedAt?.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="markdown-viewer">
+                    @Html.Raw(MarkdownRenderer.ToHtml(Model.SelectedResultContent))
+                </div>
+            </section>
+        </main>
+
+        <aside class="screen-sidebar">
+            <div class="sidebar-title">Выбор лабораторных работ</div>
+            <div class="sidebar-list">
+                @foreach (var lab in Model.Labs)
+                {
+                    <a class="sidebar-item @(lab.IsActive ? "active" : null)"
+                       asp-controller="Home"
+                       asp-action="Student"
+                       asp-route-token="@Model.Token"
+                       asp-route-labNumber="@lab.LabNumber">
+                        <div class="sidebar-item-title">Лабораторная работа №@lab.LabNumber</div>
+                        @if (!string.IsNullOrWhiteSpace(lab.Status))
+                        {
+                            <div class="sidebar-item-meta">@lab.Status</div>
+                            <div class="sidebar-item-meta">@lab.CheckedAt?.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
+                        }
+                        else
+                        {
+                            <div class="sidebar-item-meta muted">Нет результатов</div>
+                        }
+                    </a>
+                }
+            </div>
+        </aside>
     </div>
-</section>
-
-<section class="panel-grid panel-grid-single">
-    <article class="panel">
-        <h2>Репозиторий</h2>
-        @if (string.IsNullOrWhiteSpace(Model.RepoUrl))
-        {
-            <p class="empty-state">Для этой лабораторной работа еще не привязана.</p>
-        }
-        else
-        {
-            <p><a href="@Model.RepoUrl" target="_blank" rel="noreferrer">@Model.RepoUrl</a></p>
-        }
-    </article>
-
-    <article class="panel">
-        <h2>Актуальный результат</h2>
-        @if (string.IsNullOrWhiteSpace(Model.Status))
-        {
-            <p class="empty-state">Результат проверки пока отсутствует.</p>
-        }
-        else
-        {
-            <dl class="details-list">
-                <div>
-                    <dt>Статус</dt>
-                    <dd>@Model.Status</dd>
-                </div>
-                <div>
-                    <dt>Описание</dt>
-                    <dd>@Model.Result</dd>
-                </div>
-                <div>
-                    <dt>Проверено</dt>
-                    <dd>@Model.CheckedAt?.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</dd>
-                </div>
-            </dl>
-        }
-    </article>
 </section>

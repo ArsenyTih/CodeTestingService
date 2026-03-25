@@ -71,6 +71,17 @@ public class DemoCoreDataService
         return Task.FromResult(repository);
     }
 
+    public Task<IReadOnlyList<int>> GetAvailableLabNumbersAsync()
+    {
+        var labNumbers = _testRepositories
+            .Select(item => item.LabNumber)
+            .Distinct()
+            .OrderBy(number => number)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<int>>(labNumbers);
+    }
+
     private static T ReadJson<T>(string path, JsonSerializerOptions options)
     {
         if (!File.Exists(path))

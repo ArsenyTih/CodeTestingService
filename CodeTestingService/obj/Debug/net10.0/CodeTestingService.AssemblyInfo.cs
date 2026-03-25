@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeTestingService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c61aa42f8ba10444a9a81fe6d6b56dd5a6f8fdf1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22e0f76270f4bf7fe56ce91d92464b7a61c4b6f9")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeTestingService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeTestingService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,5 @@
 using CodeTestingService.Data;
+using CodeTestingService.Models.Options;
 using CodeTestingService.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,14 @@ builder.Services.AddProblemDetails();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.Configure<GitLabResultsOptions>(options =>
+{
+    options.ServiceApiToken =
+        builder.Configuration["SERVICE_API_TOKEN"]
+        ?? builder.Configuration["GitlabResultsToken:Token"]
+        ?? string.Empty;
+    options.ServiceResultsUrl = builder.Configuration["SERVICE_RESULTS_URL"] ?? string.Empty;
+});
 
 builder.Services.AddSingleton<DemoCoreDataService>();
 builder.Services.AddSingleton<DemoJwtUserService>();
@@ -31,7 +40,11 @@ else
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
 app.MapStaticAssets();
 app.UseRouting();
 app.UseAuthorization();
