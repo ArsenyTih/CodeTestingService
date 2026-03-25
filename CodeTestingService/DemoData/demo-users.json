@@ -1,0 +1,32 @@
+[
+  {
+    "token": "student-token",
+    "userId": 101,
+    "role": "Student",
+    "name": "Иванов И.И."
+  },
+  {
+    "token": "student-102-token",
+    "userId": 102,
+    "role": "Student",
+    "name": "Петров А.А."
+  },
+  {
+    "token": "student-103-token",
+    "userId": 103,
+    "role": "Student",
+    "name": "Сидоров Н.Н."
+  },
+  {
+    "token": "teacher-token",
+    "userId": 201,
+    "role": "Teacher",
+    "name": "Преподаватель П.П."
+  },
+  {
+    "token": "assistant-token",
+    "userId": 301,
+    "role": "Assistant",
+    "name": "Ассистент А.А."
+  }
+]

@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "CodeTestingService";
+}
+
+<section class="hero">
+    <div>
+        <p class="eyebrow">Демо MVP</p>
+        <h1>Сервис тестирования программного кода</h1>
+        <p class="lead">
+            В этой версии пользователь определяется по demo-токену. Для web-интерфейса токен передается
+            через <code>?token=...</code>, для API — через заголовок <code>Authorization: Bearer ...</code>.
+        </p>
+    </div>
+</section>
+
+<section class="panel-grid">
+    <article class="panel">
+        <h2>Web-страницы</h2>
+        <ul class="link-list">
+            <li><a asp-controller="Home" asp-action="Student" asp-route-token="student-token" asp-route-labNumber="1">Студент, ЛР 1</a></li>
+            <li><a asp-controller="Home" asp-action="Teacher" asp-route-token="teacher-token" asp-route-labNumber="1">Преподаватель, ЛР 1</a></li>
+            <li><a asp-controller="Home" asp-action="Assistant" asp-route-token="assistant-token" asp-route-labNumber="1">Ассистент, ЛР 1</a></li>
+            <li><a asp-controller="Results" asp-action="StudentHistory" asp-route-token="student-token" asp-route-labNumber="1">История студента</a></li>
+        </ul>
+    </article>
+
+    <article class="panel">
+        <h2>Demo-токены</h2>
+        <ul class="plain-list">
+            <li><code>student-token</code> -> студент 101</li>
+            <li><code>student-102-token</code> -> студент 102</li>
+            <li><code>student-103-token</code> -> студент 103</li>
+            <li><code>teacher-token</code> -> преподаватель</li>
+            <li><code>assistant-token</code> -> ассистент</li>
+        </ul>
+    </article>
+
+    <article class="panel">
+        <h2>Быстрые API-маршруты</h2>
+        <ul class="plain-list">
+            <li><code>GET /repositories/me?labNumber=1</code></li>
+            <li><code>GET /results/me?labNumber=1</code></li>
+            <li><code>GET /repositories/students?labNumber=1</code></li>
+            <li><code>GET /results/students?labNumber=1</code></li>
+            <li><code>POST /code</code></li>
+            <li><code>POST /gitlab/results</code></li>
+        </ul>
+    </article>
+</section>

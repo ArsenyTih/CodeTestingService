@@ -1,0 +1,57 @@
+@model CodeTestingService.Models.ViewModels.StudentPageViewModel
+
+@{
+    ViewData["Title"] = "Студент";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Роль: Student</p>
+        <h1>@Model.CurrentUserName</h1>
+        <p>Лабораторная работа №@Model.LabNumber</p>
+    </div>
+    <div class="button-row">
+        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Student" asp-route-token="@Model.Token" asp-route-labNumber="1">ЛР 1</a>
+        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Student" asp-route-token="@Model.Token" asp-route-labNumber="2">ЛР 2</a>
+        <a class="btn btn-primary" asp-controller="Results" asp-action="StudentHistory" asp-route-token="@Model.Token" asp-route-labNumber="@Model.LabNumber">История проверок</a>
+    </div>
+</section>
+
+<section class="panel-grid panel-grid-single">
+    <article class="panel">
+        <h2>Репозиторий</h2>
+        @if (string.IsNullOrWhiteSpace(Model.RepoUrl))
+        {
+            <p class="empty-state">Для этой лабораторной работа еще не привязана.</p>
+        }
+        else
+        {
+            <p><a href="@Model.RepoUrl" target="_blank" rel="noreferrer">@Model.RepoUrl</a></p>
+        }
+    </article>
+
+    <article class="panel">
+        <h2>Актуальный результат</h2>
+        @if (string.IsNullOrWhiteSpace(Model.Status))
+        {
+            <p class="empty-state">Результат проверки пока отсутствует.</p>
+        }
+        else
+        {
+            <dl class="details-list">
+                <div>
+                    <dt>Статус</dt>
+                    <dd>@Model.Status</dd>
+                </div>
+                <div>
+                    <dt>Описание</dt>
+                    <dd>@Model.Result</dd>
+                </div>
+                <div>
+                    <dt>Проверено</dt>
+                    <dd>@Model.CheckedAt?.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</dd>
+                </div>
+            </dl>
+        }
+    </article>
+</section>

@@ -1,0 +1,10 @@
+[
+  {
+    "labNumber": 1,
+    "repoUrl": "https://gitlab.example/labs-tests/lab1"
+  },
+  {
+    "labNumber": 2,
+    "repoUrl": "https://gitlab.example/labs-tests/lab2"
+  }
+]

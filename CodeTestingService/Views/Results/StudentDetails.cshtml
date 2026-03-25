@@ -1,0 +1,7 @@
+@model CodeTestingService.Models.ViewModels.StudentHistoryViewModel
+
+@{
+    ViewData["Title"] = "История студента";
+}
+
+@await Html.PartialAsync("StudentHistory", Model)

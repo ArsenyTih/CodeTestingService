@@ -1,0 +1,7 @@
+@model CodeTestingService.Models.ViewModels.TeacherPageViewModel
+
+@{
+    ViewData["Title"] = "Преподаватель";
+}
+
+@await Html.PartialAsync("_StaffDashboard", Model)

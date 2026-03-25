@@ -1,0 +1,53 @@
+@model CodeTestingService.Models.ViewModels.StudentHistoryViewModel
+
+@{
+    ViewData["Title"] = "История проверок";
+}
+
+<section class="page-header">
+    <div>
+        <p class="eyebrow">История результатов</p>
+        <h1>@Model.StudentName</h1>
+        <p>Лабораторная работа №@Model.LabNumber</p>
+    </div>
+    <div class="button-row">
+        @if (Model.IsOwnHistory)
+        {
+            <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Student" asp-route-token="@Model.Token" asp-route-labNumber="@Model.LabNumber">Назад в кабинет</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Teacher" asp-route-token="@Model.Token" asp-route-labNumber="@Model.LabNumber">К преподавателю</a>
+            <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Assistant" asp-route-token="@Model.Token" asp-route-labNumber="@Model.LabNumber">К ассистенту</a>
+        }
+    </div>
+</section>
+
+<section class="panel">
+    @if (Model.Items.Count == 0)
+    {
+        <p class="empty-state">История проверок пока пуста.</p>
+    }
+    else
+    {
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Статус</th>
+                    <th>Результат</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.CheckedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@item.Status</td>
+                        <td>@item.Result</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</section>

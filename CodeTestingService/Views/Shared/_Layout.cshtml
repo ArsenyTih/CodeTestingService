@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CodeTestingService</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CodeTestingService.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="app-header">
+        <div class="app-shell nav-bar">
+            <a class="brand" asp-controller="Home" asp-action="Index">CodeTestingService</a>
+            <nav class="top-links">
+                <a asp-controller="Home" asp-action="Student" asp-route-token="student-token" asp-route-labNumber="1">Student</a>
+                <a asp-controller="Home" asp-action="Teacher" asp-route-token="teacher-token" asp-route-labNumber="1">Teacher</a>
+                <a asp-controller="Home" asp-action="Assistant" asp-route-token="assistant-token" asp-route-labNumber="1">Assistant</a>
+                <a href="/swagger">Swagger</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="app-shell main-content">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
