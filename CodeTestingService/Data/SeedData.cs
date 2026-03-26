@@ -12,9 +12,9 @@ public static class SeedData
 
         if (!await dbContext.Repositories.AnyAsync())
         {
-            var repositories = new[] // https://gitlab.com/hse-programming-2026/labs-students/lab-9/lab-9-v-10-iiivanov
+            var repositories = new[] // https://gitlab.com/hse-programming-2026/labs-students/lab-9/lab-9-v10-iiivanov
             {
-                new Repository { StudentId = 101, LabNumber = 9, RepoUrl = "https://gitlab.com/hse-programming-2026/labs-students/lab-9/lab-9-v-10-iiivanov" },
+                new Repository { StudentId = 101, LabNumber = 9, RepoUrl = "https://gitlab.com/hse-programming-2026/labs-students/lab-9/lab-9-v10-iiivanov" },
                 new Repository { StudentId = 101, LabNumber = 10, RepoUrl = "https://gitlab.com/hse-programming-2026/labs-students/lab-10/lab-10-v-10-iiivanov" },
                 new Repository { StudentId = 102, LabNumber = 9, RepoUrl = "https://gitlab.com/hse-programming-2026/labs-students/lab-9/lab-9-v-10-aapetrov" },
                 new Repository { StudentId = 102, LabNumber = 10, RepoUrl = "https://gitlab.com/hse-programming-2026/labs-students/lab-10/lab-10-v-10-aapetrov" },
@@ -32,7 +32,7 @@ public static class SeedData
             var results = new List<CheckResult>();
             var finalReport = LoadEmbeddedTextResource(finalReportResourceName);
 
-            // if (repositoriesByUrl.TryGetValue("https://gitlab.com/hse-programming-2026/labs-students/lab-9/lab-9-v-10-iiivanov", out var student101Lab9))
+            // if (repositoriesByUrl.TryGetValue("https://gitlab.com/hse-programming-2026/labs-students/lab-9/lab-9-v10-iiivanov", out var student101Lab9))
             // {
             //     results.Add(new CheckResult
             //     {
